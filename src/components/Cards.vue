@@ -3,7 +3,7 @@
     <main class="container-fluid">
       <div class="row p-5 justify-content-center" v-if="cardsList">
         <div
-          class="col-6 col-md-4 col-lg-3"
+          class="col-6 col-md-4 col-lg-2"
           v-for="(disc, index) in cardsList"
           :key="index"
         >
@@ -58,9 +58,8 @@ export default {
 <style style lang="scss" scoped>
 @import "../assets/scss/style.scss";
 main {
-  background-color: $Container;
   .loader {
-    height: 89.35vh; //! lol
+    height: 93vh; //! lol
     display: flex;
     align-items: center;
     justify-content: center;
