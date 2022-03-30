@@ -3,7 +3,7 @@
     <main class="container-fluid">
       <div class="row p-5 justify-content-center" v-if="cardsList">
         <div
-          class="col-6 col-md-4 col-lg-2"
+          class="col-12 col-sm-6 col-md-4 col-lg-2"
           v-for="(disc, index) in cardsList"
           :key="index"
         >
