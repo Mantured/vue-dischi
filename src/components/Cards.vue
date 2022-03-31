@@ -1,18 +1,18 @@
 <template>
   <div>
     <main class="container-fluid">
-      <div class="row">
-        <div class="col-12 text-danger">
-          <h1>{{ selectToInput }} - {{ selectToSearch }}</h1>
-        </div>
-      </div>
       <div class="row p-5 justify-content-center" v-if="cardsList">
         <div
           class="col-12 col-sm-6 col-md-4 col-lg-2"
-          v-for="(disc, index) in newInputValue(selectToInput)"
+          v-for="(disc, index) in newInputValue(selectToInput, selectToSearch)"
           :key="index"
         >
           <Card :discObj="disc" />
+        </div>
+        <div class="col-12">
+          <pre class="text-white">
+            Agg caricat' {{ newInputValue.length }} dissschi
+          </pre>
         </div>
       </div>
       <div class="row" v-else>
@@ -49,7 +49,7 @@ export default {
     };
   },
   created: function () {
-    setTimeout(this.getApiElement, 1);
+    setTimeout(this.getApiElement, 5000);
   },
   methods: {
     getApiElement() {
@@ -62,18 +62,35 @@ export default {
           console.error(error);
         });
     },
-    newInputValue(stringValue) {
+    newInputValue(stringValue, stringSearch) {
       console.log(stringValue);
-      return this.cardsList.filter((element) =>
-        element.genre.includes(stringValue)
+      return this.cardsList.filter(
+        (element) =>
+          element.genre.includes(stringValue) &&
+          element.author.toLowerCase().includes(stringSearch.toLowerCase())
       );
     },
-    newSearchInput(stringSearch) {
+    /* newSearchInput(stringSearch) {
       console.log(stringSearch);
       return this.cardsList.filter((element) =>
         element.genre.includes(stringSearch)
       );
-    },
+    }, */
+  },
+  computed: {
+    /* newInputValue() {
+      if (this.selectToSearch.toLowerCase().trim() === "") {
+        console.warn("aiuto");
+        return this.cardsList;
+      }
+      return this.cardsList.filter(
+        (element) =>
+          element.genre.includes(this.selectToInput) &&
+          element.author
+            .toLowerCase()
+            .startsWith(this.selectToSearch.toLowerCase().trim())
+      );
+    }, */
   },
 };
 </script>

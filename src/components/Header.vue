@@ -10,13 +10,16 @@
       </div>
       <div class="row justify-content-center">
         <div class="col-10 d-flex align-items-center">
-          <select
-            v-model="selectInput"
-            @click="$emit('select', selectInput)"
-            class="form-select my-size"
-            aria-label="Default select example"
-          >
-          <option v-for="(genre, index) in "value=""></option>
+          <select v-model="selectInput" class="form-select my-size">
+            <option @click="$emit('select', selectInput)" value="">All</option>
+            <option
+              v-for="genre in genresList"
+              :key="genre"
+              :value="genre"
+              @click="$emit('select', selectInput)"
+            >
+              {{ genre }}
+            </option>
             <!-- <option value>Select kind of disc</option>
             <option value="Rock">Rock</option>
             <option value="Pop">Pop</option>
@@ -50,7 +53,7 @@
 </template>
 
 <script>
-import axios from "axios";
+/* import axios from "axios"; */
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Header",
@@ -59,11 +62,24 @@ export default {
     return {
       selectInput: "",
       searchInput: "",
-      genresList: "",
+      genresList: ["Rock", "Pop", "Jazz", "Metal"],
     };
   },
+  /* created: function () {
+    this.getGenresList();
+  }, */
   methods: {
-    },
+    /* getGenresList() {
+      axios
+        .get("https://flynn.boolean.careers/exercises/api/array/music")
+        .then((result) => {
+          this.genresList = result.data.response;
+          console.log(this.genresList);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    }, */
     newEvent() {
       if (this.searchInput === "") {
         console.warn("nessuna richerca");

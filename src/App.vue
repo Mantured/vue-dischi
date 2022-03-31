@@ -23,12 +23,13 @@ export default {
   },
   methods: {
     selectGenre(value) {
-      console.log(value);
       this.selectToInput = value;
       console.warn(this.selectToInput);
     },
     searchArtist(search) {
-      console.warn(search);
+      if (search.trim() === "") {
+        console.warn("aiuto 2");
+      }
       this.selectToSearch = search;
       console.log(this.selectToSearch);
     },
