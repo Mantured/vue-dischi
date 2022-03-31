@@ -68,6 +68,12 @@ export default {
         element.genre.includes(stringValue)
       );
     },
+    newSearchInput(stringSearch) {
+      console.log(stringSearch);
+      return this.cardsList.filter((element) =>
+        element.genre.includes(stringSearch)
+      );
+    },
   },
 };
 </script>
