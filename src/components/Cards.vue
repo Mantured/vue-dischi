@@ -12,7 +12,8 @@
       </div>
       <div class="row" v-else>
         <div class="col-12">
-          <h1 class="loader text-danger">Loading...</h1>
+          <!-- <h1 class="loader text-danger">Loading...</h1> -->
+          <Loader />
         </div>
       </div>
     </main>
@@ -24,12 +25,14 @@
 import axios from "axios";
 
 import Card from "./Card.vue";
+import Loader from "./Loader.vue";
 
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Cards",
   components: {
     Card,
+    Loader,
   },
   data: function () {
     return {
@@ -37,7 +40,7 @@ export default {
     };
   },
   created: function () {
-    setTimeout(this.getApiElement, 10000);
+    setTimeout(this.getApiElement, 5000);
   },
   methods: {
     getApiElement() {
