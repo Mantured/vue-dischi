@@ -8,10 +8,6 @@
           </a>
         </div>
       </div>
-      <p class="text-danger">
-        selezionato :
-        {{ selectInput }} - {{ searchInput }}
-      </p>
       <div class="row justify-content-center">
         <div class="col-10 d-flex align-items-center">
           <select
@@ -20,25 +16,32 @@
             class="form-select my-size"
             aria-label="Default select example"
           >
-            <option value>Select kind of disc</option>
+          <option v-for="(genre, index) in "value=""></option>
+            <!-- <option value>Select kind of disc</option>
             <option value="Rock">Rock</option>
             <option value="Pop">Pop</option>
             <option value="Jazz">Jazz</option>
-            <option value="Metal">Metal</option>
+            <option value="Metal">Metal</option> -->
           </select>
           <div class="container">
-            <form class="d-flex">
+            <div class="d-flex">
               <input
                 class="form-control me-2"
                 type="search"
                 placeholder="Search"
-                v-model="searchInput"
-                @keyup.down="$emit('search', searchInput)"
+                v-model.trim="searchInput"
+                @keydown="newEvent"
+                @keyup.enter="$emit('search', searchInput)"
               />
-              <button class="btn btn-outline-success" type="submit">
+              <!-- "$emit('search', searchInput)" -->
+              <button
+                @click="$emit('search', searchInput)"
+                class="btn btn-outline-success"
+                type="submit"
+              >
                 Search
               </button>
-            </form>
+            </div>
           </div>
         </div>
       </div>
@@ -47,6 +50,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Header",
@@ -55,7 +59,19 @@ export default {
     return {
       selectInput: "",
       searchInput: "",
+      genresList: "",
     };
+  },
+  methods: {
+    },
+    newEvent() {
+      if (this.searchInput === "") {
+        console.warn("nessuna richerca");
+        this.searchInput = "";
+      } else {
+        this.$emit("search", this.searchInput);
+      }
+    },
   },
 };
 </script>
