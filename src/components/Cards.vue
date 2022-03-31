@@ -1,10 +1,15 @@
 <template>
   <div>
     <main class="container-fluid">
+      <div class="row">
+        <div class="col-12 text-danger">
+          <h1>{{ selectToInput }} - {{ selectToSearch }}</h1>
+        </div>
+      </div>
       <div class="row p-5 justify-content-center" v-if="cardsList">
         <div
           class="col-12 col-sm-6 col-md-4 col-lg-2"
-          v-for="(disc, index) in cardsList"
+          v-for="(disc, index) in newInputValue(selectToInput)"
           :key="index"
         >
           <Card :discObj="disc" />
@@ -30,6 +35,10 @@ import Loader from "./Loader.vue";
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Cards",
+  props: {
+    selectToInput: String,
+    selectToSearch: String,
+  },
   components: {
     Card,
     Loader,
@@ -40,7 +49,7 @@ export default {
     };
   },
   created: function () {
-    setTimeout(this.getApiElement, 5000);
+    setTimeout(this.getApiElement, 1);
   },
   methods: {
     getApiElement() {
@@ -48,11 +57,16 @@ export default {
         .get("https://flynn.boolean.careers/exercises/api/array/music")
         .then((result) => {
           this.cardsList = result.data.response;
-          console.table(this.cardsList);
         })
         .catch((error) => {
           console.error(error);
         });
+    },
+    newInputValue(stringValue) {
+      console.log(stringValue);
+      return this.cardsList.filter((element) =>
+        element.genre.includes(stringValue)
+      );
     },
   },
 };

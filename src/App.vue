@@ -1,7 +1,7 @@
 <template>
   <div id="app">
-    <Header />
-    <Cards />
+    <Header @select="selectGenre" @search="searchArtist" />
+    <Cards :selectToInput="selectToInput" :selectToSearch="selectToSearch" />
   </div>
 </template>
 
@@ -15,6 +15,24 @@ export default {
     Header,
     Cards,
   },
+  data: function () {
+    return {
+      selectToInput: "",
+      selectToSearch: "",
+    };
+  },
+  methods: {
+    selectGenre(value) {
+      console.log(value);
+      this.selectToInput = value;
+      console.warn(this.selectToInput);
+    },
+    searchArtist(search) {
+      console.warn(search);
+      this.selectToSearch = search;
+      console.log(this.selectToSearch);
+    },
+  },
 };
 </script>
 
@@ -24,5 +42,7 @@ export default {
 
 #app {
   background-color: $Container;
+  height: 100vh;
+  overflow: auto;
 }
 </style>
