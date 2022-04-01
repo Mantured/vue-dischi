@@ -11,7 +11,9 @@
         </div>
         <div class="col-12">
           <pre class="text-white">
-            Agg caricat' {{ newInputValue.length }} dissschi
+            Agg caricat' {{
+              newInputValue(selectToInput, selectToSearch).length
+            }} dissschi
           </pre>
         </div>
       </div>

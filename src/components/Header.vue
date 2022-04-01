@@ -100,7 +100,5 @@ nav {
     width: 100%;
     height: 7vh;
   }
-  select.my-size {
-  }
 }
 </style>
